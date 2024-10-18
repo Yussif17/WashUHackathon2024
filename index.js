@@ -1,7 +1,7 @@
 import { API_KEY } from "./config.js";
-
-
+import { locations } from "./locations.js"; 
 function loadMap() {
+    const location = ;
     const latitude = document.getElementById('latitude').value || '38.6463999'; 
     const longitude = document.getElementById('longitude').value || '-90.3109969'; 
 
