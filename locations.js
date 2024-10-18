@@ -6,3 +6,6 @@ const locations = [{
 function function1() {
   console.log('hi');console.log('hi');console.log('hi');
 }
+
+console.log('Yussif Ramadan');
+console.log('Radix Sort');
