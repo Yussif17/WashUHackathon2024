@@ -1,8 +1,86 @@
 const locations = [{
+  id: '0',
+  latitude: 38.6470456,
+  longitude: -90.3095148
+}, {
   id: '1',
+  latitude: 38.6479052,
+  longitude: -90.3125099
+}, {
+  id: '2',
+  latitude: 38.6460698,
+  longitude: -90.311105
+}, {
+  id: '3',
+  latitude: 38.6479945,
+  longitude: -90.3081355
+}, {
+  id: '4',
   latitude: 5,
   longitude: 5
-},];
-function function1() {
-  console.log('hi');console.log('hi');console.log('hi');
-}
+}, {
+  id: '5',
+  latitude: 5,
+  longitude: 5
+}, {
+  id: '6',
+  latitude: 5,
+  longitude: 5
+}, {
+  id: '7',
+  latitude: 5,
+  longitude: 5
+}, {
+  id: '8',
+  latitude: 5,
+  longitude: 5
+}, {
+  id: '9',
+  latitude: 5,
+  longitude: 5
+}, {
+  id: '10',
+  latitude: 5,
+  longitude: 5
+}, {
+  id: '11',
+  latitude: 5,
+  longitude: 5
+}, {
+  id: '12',
+  latitude: 5,
+  longitude: 5
+}, {
+  id: '13',
+  latitude: 5,
+  longitude: 5
+}, {
+  id: '14',
+  latitude: 5,
+  longitude: 5
+}, {
+  id: '15',
+  latitude: 5,
+  longitude: 5
+}, {
+  id: '18',
+  latitude: 5,
+  longitude: 5
+}, {
+  id: '19',
+  latitude: 5,
+  longitude: 5
+}, {
+  id: '20',
+  latitude: 5,
+  longitude: 5
+}, {
+  id: '21',
+  latitude: 5,
+  longitude: 5
+}, {
+  id: '22',
+  latitude: 5,
+  longitude: 5
+}];
+
