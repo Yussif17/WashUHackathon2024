@@ -1,0 +1,69 @@
+[debug] [2024-10-18T23:45:57.436Z] ----------------------------------------------------------------------
+[debug] [2024-10-18T23:45:57.437Z] Command:       /usr/local/bin/node /usr/local/bin/firebase init firestore
+[debug] [2024-10-18T23:45:57.437Z] CLI Version:   13.22.1
+[debug] [2024-10-18T23:45:57.437Z] Platform:      darwin
+[debug] [2024-10-18T23:45:57.437Z] Node Version:  v20.18.0
+[debug] [2024-10-18T23:45:57.438Z] Time:          Fri Oct 18 2024 18:45:57 GMT-0500 (Central Daylight Time)
+[debug] [2024-10-18T23:45:57.438Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-10-18T23:45:57.469Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-10-18T23:45:57.469Z] > authorizing via signed-in user (hamzehahmad06@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/ahmadhamzeh/WashUHackathon2024
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2024-10-18T23:45:57.471Z] Using project from CLI flag: guesswashu-a6eb8
+[debug] [2024-10-18T23:45:57.471Z] Checked if tokens are valid: true, expires at: 1729298253610
+[debug] [2024-10-18T23:45:57.471Z] Checked if tokens are valid: true, expires at: 1729298253610
+[debug] [2024-10-18T23:45:57.472Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/guesswashu-a6eb8 [none]
+[debug] [2024-10-18T23:45:57.635Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/guesswashu-a6eb8 200
+[debug] [2024-10-18T23:45:57.635Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/guesswashu-a6eb8 {"projectId":"guesswashu-a6eb8","projectNumber":"194862977893","displayName":"GuessWashU","name":"projects/guesswashu-a6eb8","resources":{"hostingSite":"guesswashu-a6eb8"},"state":"ACTIVE","etag":"1_41c0e13e-01c5-4c0e-a262-178df7513b48"}
+[info] i  Using project guesswashu-a6eb8 (GuessWashU) 
+[info] 
+=== Firestore Setup
+[debug] [2024-10-18T23:45:57.641Z] Checked if tokens are valid: true, expires at: 1729298253610
+[debug] [2024-10-18T23:45:57.641Z] Checked if tokens are valid: true, expires at: 1729298253610
+[debug] [2024-10-18T23:45:57.641Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/guesswashu-a6eb8/services/firestore.googleapis.com [none]
+[debug] [2024-10-18T23:45:57.641Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/guesswashu-a6eb8/services/firestore.googleapis.com x-goog-quota-user=projects/guesswashu-a6eb8
+[debug] [2024-10-18T23:45:57.908Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/guesswashu-a6eb8/services/firestore.googleapis.com 200
+[debug] [2024-10-18T23:45:57.908Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/guesswashu-a6eb8/services/firestore.googleapis.com [omitted]
+[debug] [2024-10-18T23:45:57.908Z] Checked if tokens are valid: true, expires at: 1729298253610
+[debug] [2024-10-18T23:45:57.908Z] Checked if tokens are valid: true, expires at: 1729298253610
+[debug] [2024-10-18T23:45:57.908Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/guesswashu-a6eb8/databases/(default) [none]
+[debug] [2024-10-18T23:45:58.100Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/guesswashu-a6eb8/databases/(default) 200
+[debug] [2024-10-18T23:45:58.100Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/guesswashu-a6eb8/databases/(default) {"name":"projects/guesswashu-a6eb8/databases/(default)","uid":"805042a6-a573-4f2b-a3e4-ced4ee76bcf6","createTime":"2024-10-18T21:25:15.276035Z","updateTime":"2024-10-18T21:25:15.276035Z","locationId":"nam5","type":"FIRESTORE_NATIVE","concurrencyMode":"PESSIMISTIC","versionRetentionPeriod":"3600s","earliestVersionTime":"2024-10-18T22:45:58.103558Z","appEngineIntegrationMode":"DISABLED","keyPrefix":"s","pointInTimeRecoveryEnablement":"POINT_IN_TIME_RECOVERY_DISABLED","deleteProtectionState":"DELETE_PROTECTION_DISABLED","etag":"IIyW8byOmYkDMPbcy8DvmIkD"}
+[debug] [2024-10-18T23:45:58.100Z] database_type: FIRESTORE_NATIVE
+[debug] [2024-10-18T23:45:58.101Z] database_type: FIRESTORE_NATIVE
+[debug] [2024-10-18T23:45:58.101Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-10-18T23:45:58.101Z] > authorizing via signed-in user (hamzehahmad06@gmail.com)
+[debug] [2024-10-18T23:45:58.101Z] [iam] checking project guesswashu-a6eb8 for permissions ["firebase.projects.get"]
+[debug] [2024-10-18T23:45:58.101Z] Checked if tokens are valid: true, expires at: 1729298253610
+[debug] [2024-10-18T23:45:58.101Z] Checked if tokens are valid: true, expires at: 1729298253610
+[debug] [2024-10-18T23:45:58.101Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/guesswashu-a6eb8:testIamPermissions [none]
+[debug] [2024-10-18T23:45:58.101Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/guesswashu-a6eb8:testIamPermissions x-goog-quota-user=projects/guesswashu-a6eb8
+[debug] [2024-10-18T23:45:58.101Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/guesswashu-a6eb8:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2024-10-18T23:45:58.305Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/guesswashu-a6eb8:testIamPermissions 200
+[debug] [2024-10-18T23:45:58.306Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/guesswashu-a6eb8:testIamPermissions {"permissions":["firebase.projects.get"]}
+[info] 
+[info] Firestore Security Rules allow you to define how and when to allow
+[info] requests. You can keep these rules in your project directory
+[info] and publish them with firebase deploy.
+[info] 
