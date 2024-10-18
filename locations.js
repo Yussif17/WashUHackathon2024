@@ -1,9 +1,6 @@
 const locations = [{ // Ahmad = 0, 3, .. Samir = 1, 4, .. Elgamel = 2, 5, ...
   id: '0',
-  latitude: 5,
-  longitude: 5,
-  h: 1,
-  t: 1
+  data: '38.6475532,-90.3088656,3a,75y,6.67h,98.89t'
 }, {
   id: '1',
   latitude: 38.6479052,
