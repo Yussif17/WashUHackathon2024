@@ -23,7 +23,7 @@ export function switchImage() {
   const button = document.querySelector('.js-switch-img');
   if (button.innerHTML === 'Show Map') {
     
-    document.getElementById('realmap').src = `https://maps.googleapis.com/maps/api/streetview?location=${latitude},${longitude}&size=600x400&key=${API_KEY}`;
+   
     document.querySelector('.js-image').classList.add('invisible');
     document.querySelector('.js-map').classList.remove('invisible');
    
