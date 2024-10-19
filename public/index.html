@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,15 +23,17 @@
       to avoid connecting the SDK to running emulators.
     -->
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
   </head>
   <body>
+  
     <div id="map-container">
-      <img id="map" src="" alt="Google Map">
-      <br>
-      <input type="text" id="latitude" placeholder="Enter Latitude">
-      <input type="text" id="longitude" placeholder="Enter Longitude">
+      <img id="realmap" class="js-image" src="" alt="Google Map">
+      <div id="map" class="js-map"></div>
       <button class="js-load-map">Load Map</button>
+      <button class="js-switch-img">Show Map</button>
     </div>
     <script type="module" src="index.js"></script>
+  
   </body>
 </html>
