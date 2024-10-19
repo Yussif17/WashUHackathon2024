@@ -11,9 +11,9 @@ body {
   text-align: center;
 }
 
-#realmap {
-  width: 1600px;
-  height: 1080px;
+#map {
+  width: 1000px;
+  height: 800px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
@@ -49,4 +49,8 @@ input {
 
 button:hover {
   background-color: rgb(52, 87, 200);
+}
+
+#map {
+  height: 100%;
 }
