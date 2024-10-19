@@ -3,16 +3,16 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 3000px;
   margin: 0;
   background-color: #f1f1f1;
 }
 
 #map-container {
-  justify-content: center;
+  text-align: center;
 }
 
-#image {
+#map {
   width: 1600px;
   height: 1080px;
   border-radius: 8px;
@@ -34,7 +34,9 @@ input {
   border: 1px solid #ddd;
 }
 
-button {
+.js-switch-img,
+.js-load-map
+ {
   padding: 10px;
   margin-top: 10px;
   border: none;
