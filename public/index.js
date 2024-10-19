@@ -3,6 +3,7 @@ import { loadMap, switchImage } from "./mapfunctions.js";
 
 
 document.addEventListener("DOMContentLoaded", async event => {
+  document.querySelector('.js-map').classList.add('invisible');
   
   class dataValues {
     constructor() {

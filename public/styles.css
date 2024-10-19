@@ -1,12 +1,7 @@
-
-
-
 /* General body styling */
 body {
   font-family: Arial;
-  justify-content: center;
-  align-items: center;
-  height: 3000px;
+  height: 100vh;
   margin: 0;
   background-color: #f1f1f1;
   display: grid;
