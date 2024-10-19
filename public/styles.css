@@ -1,10 +1,7 @@
-
-
-
 /* General body styling */
 body {
   font-family: Arial;
-  height: 100vh; /* Use vh to fill the entire viewport height */
+  height: 100vh;
   margin: 0;
   background-color: #f1f1f1;
   display: grid;
