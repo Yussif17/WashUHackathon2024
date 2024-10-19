@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", async event => {
       this.lat = lat;
       this.lng = lng;
     }
+
   }
   class dataValues {
     constructor() {
@@ -56,6 +57,16 @@ document.addEventListener("DOMContentLoaded", async event => {
     }
   }
 
+  const dataValue = new dataValues();
+  const app = firebase.app();
+  const db = firebase.firestore();
+  const doc = await pickRandomPlace().get();
+  const data = doc.data();
+
+  let map;
+  let mark;
+  let lastKnownMarkerVals;
+
   function pickRandomPlace() {
     return db.collection('locations').doc('' + getRandomInt(102));
   }
@@ -64,20 +75,21 @@ document.addEventListener("DOMContentLoaded", async event => {
     return Math.floor(Math.random() * max);
   }
 
-  
-  const dataValue = new dataValues();
-  const app = firebase.app();
-  const db = firebase.firestore();
-  const doc = await pickRandomPlace().get();
-  const data = doc.data();
+  function addMarker(location) {
+      return new google.maps.Marker({
+        position: location,
+        map: map
+      });
+    }
+
    
-  dataValue.parse(data.data);
-  document.querySelector('.js-load-map').addEventListener('click', () => {
+  dataValue.parse(data.data); //dataValue object holds picture location data
+
+  document.querySelector('.js-load-map').addEventListener('click', () => { //on clicking the load map button
     loadMap(dataValue.longitude, dataValue.latitude, dataValue.h, dataValue.t, dataValue.y);
-    console.log(dataValue);
+    console.log(dataValue); //to debug
   });
 
-  console.log(dataValue.longitude);
   
 
   (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({
@@ -88,13 +100,10 @@ document.addEventListener("DOMContentLoaded", async event => {
   });
 
 
-  let map;
-  let mark;
-  let array = [];
-  let temp;
+  
 
   async function initMap() {
-    const { Map } = await google.maps.importLibrary("maps");
+    const { Map } = await google.maps.importLibrary("maps"); //promise
     map = new Map(document.getElementById("map"), {
       center: { lat: 38.6469166, lng: -90.3129897 }, 
       zoom: 16,
@@ -107,26 +116,21 @@ document.addEventListener("DOMContentLoaded", async event => {
         mark.setMap(null);
       }
       mark = addMarker(event.latLng);
-      temp = new markerValues(event.latLng.lat(), event.latLng.lng()); 
+      lastKnownMarkerVals = new markerValues(event.latLng.lat(), event.latLng.lng()); 
+      //console.log(lastKnownMarkerVals); for debug (works properly)
     }); 
   
-    function addMarker(location) {
-      return new google.maps.Marker({
-        position: location,
-        map: map
-      });
-    }
+    
   }
   
 
- initMap();
+ initMap(); //async function
 
 
 
 
   
-(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
-  ({key: `${API_KEY}`, v: "weekly"});
+
 });
 
 document.querySelector('.js-load-map').addEventListener('click', () => {
