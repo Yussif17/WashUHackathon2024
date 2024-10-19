@@ -23,15 +23,24 @@
       to avoid connecting the SDK to running emulators.
     -->
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
   </head>
   <body>
-    <div id="map-container">
-      <img id="map" src="" alt="Google Map">
+    <div id="map"></div>
+   <div id="map-container">
+      <img id="realmap" src="" class="js-image">
       <br>
       <input type="text" id="latitude" placeholder="Enter Latitude">
       <input type="text" id="longitude" placeholder="Enter Longitude">
+      <input type="text" id="a" placeholder="Enter a">
+      <input type="text" id="y" placeholder="Enter y">
+      <input type="text" id="h" placeholder="Enter h">
+      <input type="text" id="t" placeholder="Enter t">
       <button class="js-load-map">Load Map</button>
+      <button class="js-switch-img">Show Map</button>
     </div>
+  
     <script type="module" src="index.js"></script>
+  
   </body>
 </html>

@@ -10,11 +10,18 @@ body {
 
 #map-container {
   text-align: center;
+
+}
+#map {
+  height: 100%;
+
 }
 
-#map {
-  width: 1600px;
-  height: 1080px;
+
+
+.realmap {
+  width: 800px;
+  height: 600px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
@@ -27,7 +34,9 @@ input {
   border: 1px solid #ddd;
 }
 
-button {
+.js-switch-img,
+.js-load-map
+ {
   padding: 10px;
   margin-top: 10px;
   border: none;
