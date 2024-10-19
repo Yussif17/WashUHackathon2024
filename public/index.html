@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,13 +25,14 @@
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
   </head>
   <body>
+    <div id="map"></div>
     <div id="map-container">
-      <img id="map" src="" alt="Google Map">
+      <img id="image" src="" alt="Google Map">
       <br>
       <input type="text" id="latitude" placeholder="Enter Latitude">
       <input type="text" id="longitude" placeholder="Enter Longitude">
       <button class="js-load-map">Load Map</button>
-    </div>
+    </div> 
     <script type="module" src="index.js"></script>
   </body>
 </html>

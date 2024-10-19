@@ -9,15 +9,22 @@ body {
 }
 
 #map-container {
-  text-align: center;
+  justify-content: center;
 }
 
-#map {
+#image {
   width: 1600px;
   height: 1080px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
+
+#map {
+  height: 1600px;
+  width: 1080px;
+}
+
+
 
 input {
   margin: 10px 5px;
