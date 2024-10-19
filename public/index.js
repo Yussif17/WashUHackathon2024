@@ -105,10 +105,11 @@ document.addEventListener("DOMContentLoaded", async event => {
   async function initMap() {
     const { Map } = await google.maps.importLibrary("maps"); //promise
     map = new Map(document.getElementById("map"), {
-      center: { lat: 38.6469166, lng: -90.3129897 }, 
-      zoom: 16,
+      center: { lat: 38.6479166, lng: -90.3099897 }, 
+      zoom: 15.2,
       streetViewControl: false,
       mapTypeControl: false,
+      clickableIcons: false
     });
 
     const marker = await map.addListener("click", (event) => {
