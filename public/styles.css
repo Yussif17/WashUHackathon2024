@@ -1,6 +1,5 @@
 body {
   font-family: Arial;
-  display: flex;
   justify-content: center;
   align-items: center;
   height: 3000px;
@@ -12,7 +11,7 @@ body {
   text-align: center;
 }
 
-#map {
+#realmap {
   width: 1600px;
   height: 1080px;
   border-radius: 8px;
