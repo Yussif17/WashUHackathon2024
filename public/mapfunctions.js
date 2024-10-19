@@ -7,9 +7,9 @@ let y =  '75';
 let h =  '300.85'; 
 let t =  '86.49';  
 
-export function loadMap(long, lat, h, t, y) {
+export function loadMap(long, lat, h, t) {
 
-  const mapUrl = `https://maps.googleapis.com/maps/api/streetview?location=${long},${lat}&size=600x400&heading=${h}&pitch=${t}&fov=${y}&key=${API_KEY}`;
+  const mapUrl = `https://maps.googleapis.com/maps/api/streetview?location=${long},${lat}&size=600x400&heading=${h}&pitch=${90 - t}&fov=120&key=${API_KEY}`;
    
   document.getElementById('realmap').src = mapUrl;
 };

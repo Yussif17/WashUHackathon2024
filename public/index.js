@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", async event => {
   }
 
   function pickRandomPlace() {
-    return db.collection('locations').doc('' + getRandomInt(25));
+    return db.collection('locations').doc('' + getRandomInt(102));
   }
             
   function getRandomInt(max) {
@@ -68,6 +68,7 @@ document.addEventListener("DOMContentLoaded", async event => {
   dataValue.parse(data.data);
   document.querySelector('.js-load-map').addEventListener('click', () => {
     loadMap(dataValue.longitude, dataValue.latitude, dataValue.h, dataValue.t, dataValue.y);
+    console.log(dataValue);
   });
 
   console.log(dataValue.longitude);
@@ -86,16 +87,13 @@ document.addEventListener("DOMContentLoaded", async event => {
   async function initMap() {
     const { Map } = await google.maps.importLibrary("maps");
 
-  map = new Map(document.getElementById("map"), {
-    center: { lat: 38.6469166, lng: -90.3129897 }, 
-    zoom: 16,
-    streetViewControl: false,
-    mapTypeControl: false
-  });
-  const marker = new AdvancedMarkerElement({
-    map,
-    position: { lat: 38.6469166, lng: -90.3129897 },
-  });
+    map = new Map(document.getElementById("map"), {
+      center: { lat: 38.6469166, lng: -90.3129897 }, 
+      zoom: 16,
+      streetViewControl: false,
+      mapTypeControl: false
+    });
+    
 }
 
 initMap();
