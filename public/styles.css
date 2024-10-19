@@ -1,3 +1,7 @@
+
+
+
+/* General body styling */
 body {
   font-family: Arial;
   justify-content: center;
@@ -5,52 +9,67 @@ body {
   height: 3000px;
   margin: 0;
   background-color: #f1f1f1;
+  display: grid;
+  place-items: center; /* Center the entire map-container within the body */
 }
 
+/* Map container styling */
 #map-container {
-  text-align: center;
+  display: grid;
+  grid-template-rows: 3fr 1fr; /* Upper and lower halves */
+  width: 80%; /* Adjust to control the map container size */
+  height: 80%; /* Adjust the height to fit nicely */
+  border: 1px solid black;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Optional shadow for better visuals */
+  background-color: white; /* Background for the map container */
 }
 
-#map {
-  width: 1000px;
-  height: 800px;
+/* Upper half containing the map and image */
+.upperhalf {
+  display: grid;
+  grid-template-columns: 1fr; /* Use a single column layout */
+  place-items: center; /* Center content inside upper half */
+  height: 100%; /* Ensure it fills its parent row */
+  width: 100%;
+  position: relative; /* Make sure elements stack properly */
+}
+
+#map, 
+.js-image {
+  height: 100%; /* Ensure map fills available space */
+  width: 100%;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  position: absolute; /* Stack the map and image on top of each other */
 }
 
-#map {
-  height: 1600px;
-  width: 1080px;
+/* Lower half for buttons */
+.lowerhalf {
+  display: flex;
+  justify-content: center; /* Center the buttons horizontally */
+  align-items: center; /* Center the buttons vertically */
+  gap: 10px; /* Add space between the buttons */
 }
 
-.invisible {
-  opacity: 0;
-}
-
-input {
-  margin: 10px 5px;
+/* Button styling */
+.js-switch-img, .js-load-map {
   padding: 10px;
-  width: 200px;
-  border-radius: 4px;
-  border: 1px solid #ddd;
-}
-
-.js-switch-img,
-.js-load-map
- {
-  padding: 10px;
-  margin-top: 10px;
   border: none;
   background-color: rgb(52, 87, 200);
   color: white;
   cursor: pointer;
   border-radius: 4px;
+  transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: rgb(52, 87, 200);
+  background-color: rgb(40, 70, 180);
 }
 
-#map {
-  height: 100%;
+/* Invisible class styling */
+.invisible {
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
