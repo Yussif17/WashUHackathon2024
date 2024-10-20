@@ -135,9 +135,6 @@ document.addEventListener("DOMContentLoaded", async event => {
     submitButtonClicked();
   });
 
-
-
-  let timeTaken;
   let timerInterval;
   let timeRemaining;
 // Function to start a two-minute countdown timer
@@ -238,7 +235,7 @@ function haversine_distance(realLat, realLng, mk2) { //RealMarker(split into its
   
     line.setMap(map);
     
-    let zoomLevel = map.getZoom();
+   
     async function animateZoom(duration) {
       map.setCenter({
         lat: (Number(dataValue.latitude) + lastKnownMarkerVals.lat) / 2,
