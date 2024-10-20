@@ -81,6 +81,7 @@ document.addEventListener("DOMContentLoaded", async event => {
   }
 
   function addMarker(location) {
+    document.querySelector('.js-submit').classList.remove('invisible');
       return new google.maps.Marker({
         position: location,
         map: map
@@ -155,18 +156,6 @@ let timerIntervalDone;
  
 
      timerInterval = setInterval(() => {
-        const minutes = Math.floor(timeRemaining / 60); // Get remaining minutes
-        const seconds = timeRemaining % 60; // Get remaining seconds
-
-        // Pad seconds with a leading zero if needed (e.g., 01, 02, ...)
-        const formattedSeconds = seconds < 10 ? '0' + seconds : seconds;
-
-        //format to (min:sec) and display (for every second)
-
-        // Update the display element with the remaining time
-        //displayElement.textContent = `${minutes}:${formattedSeconds}`;
-
-        // Decrease timeRemaining each second
         timeRemaining--;
         timeUsed = timeRemaining;
         timerIntervalDone = timerInterval;
@@ -174,10 +163,9 @@ let timerIntervalDone;
         // Stop the timer when it reaches zero
         if (timeRemaining <= 0) {
             clearInterval(timerInterval); // Stop the timer
-            //alert('Time’s up!'); 
             submitButtonClicked();
         }
-    }, 1000); // Update every 1 second (1000ms)
+    }, 1000); // Update every 1 second 
 }
 
 
