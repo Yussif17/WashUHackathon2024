@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>GeoGuessr - Explore the World!</title>
+   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lobster&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+   <style>
+       body {
+           font-family: 'Times New Roman', sans-serif;
+           background-image: url('https://admissionsight.com/wp-content/uploads/2022/02/shutterstock_12403774.jpg'); /* WashU background image */
+           background-size: cover;
+           background-position: center;
+           color: rgb(12, 180, 6);
+           text-align: center;
+           padding: 50px;
+           height: 100vh;
+           display: flex;
+           margin: 0;
+           overflow: hidden; /* Hide overflow for a cleaner look */
+       }
+
+
+       h1 {
+           font-weight: bold;
+           -webkit-text-stroke-width: 1px;
+           -webkit-text-stroke-color: black;
+       }
+
+
+       #start-button {
+          
+       }
+
+
+       p {
+           color: rgb(12, 180, 6);
+           text-align: center;
+          
+       }
+       /* Sidebar Styles */
+       #sidebar {
+           width: 250px; /* Width of the sidebar */
+           background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
+           padding: 30px;
+           position: fixed; /* Fixed positioning */
+           top: 0;
+           left: -210px; /* Start hidden */
+           height: 100%; /* Full height */
+           box-shadow: 2px 0 20px rgba(0, 0, 0, 0.5);
+           transition: left 0.3s ease; /* Smooth slide in/out transition */
+       }
+       #sidebar.active {
+           left: 0; /* Show the sidebar */
+       }
+       #sidebar h2 {
+           font-family: 'Times New Roman', cursive;
+           color: rgb(252, 250, 250); /* Menu color*/
+           font-size: 1.8rem; /* Slightly larger font size */
+           text-align: center;
+           margin-bottom: 20px;
+       }
+       #sidebar a {
+           display: block;
+           color: rgb(255, 252, 252);
+           text-decoration: none;
+           margin: 15px 0;
+           text-align: center;
+           font-size: 1.3rem;
+           padding: 10px 0;
+           transition: background-color 0.3s ease; /* Smooth background transition */
+       }
+       #sidebar a:hover {
+           background-color: rgba(255, 0, 0, 0.8); /* Red background on hover */
+           border-radius: 5px; /* Rounded corners on hover */
+       }
+       /* Hamburger Menu Styles */
+       #hamburger {
+           position: fixed;
+           top: 20px;
+           left: 20px;
+           cursor: pointer;
+           z-index: 10; /* Ensures it's on top of other content */
+       }
+       #hamburger div {
+           width: 30px;
+           height: 4px;
+           background-color: white;
+           margin: 5px;
+           transition: all 0.3s ease; /* Smooth transition for bars */
+       }
+       /* Main Content Styles */
+       #main-content {
+           margin-left: 270px; /* Leave space for the sidebar */
+           flex-grow: 1; /* Allow the content to take the remaining space */
+           display: flex;
+           flex-direction: column;
+           justify-content: center;
+           align-items: center;
+           transition: margin-left 0.3s ease; /* Smooth transition for content */
+       }
+       h1 {
+           font-family: 'Times New Roman', cursive;
+           font-size: 3.5rem;
+           margin-bottom: 20px;
+           text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+       }
+       p {
+           font-family: 'Montserrat', sans-serif; /* Changed font to Montserrat */
+           font-size: 1.8rem; /* Increased font size */
+           margin-bottom: 30px;
+           text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+           line-height: 1.4; /* Improved line height for readability */
+       }
+       #start-button {
+           background-color: rgba(255, 0, 0, 0.9); /* More opaque red */
+           color: rgb(0, 0, 0);
+           border: none;
+           padding: 15px 30px;
+           font-size: 1.6rem;
+           font-family: 'Times New Roman', cursive; /* Using Lobster font for the button */
+           cursor: pointer;
+           border-radius: 5px;
+           transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+           box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+       }
+       #start-button:hover {
+           background-color: rgba(200, 0, 0, 0.9); /* Darker red on hover */
+           transform: scale(1.1); /* Slightly enlarge the button on hover */
+       }
+   </style>
+</head>
+<body>
+   <!-- Hamburger Menu Icon -->
+   <div id="hamburger" onclick="toggleSidebar()">
+       <div></div>
+       <div></div>
+       <div></div>
+   </div>
+
+
+   <!-- Sidebar -->
+   <div id="sidebar">
+       <h2>Menu</h2>
+       <a href="homeweb.html">Home</a>
+       <a href="instructions.html">Instructions</a> <!-- New Instructions link -->
+       <a href="credits.html">Credits</a>
+   </div>
+
+
+   <!-- Main Content -->
+   <div id="main-content">
+       <h1>Welcome to Guess WashU!</h1>
+       <p>Can you guess where you are in WashU?</p>
+       <button id="start-button" onclick="startGame()">Start Game</button>
+   </div>
+
+
+   <script>
+       function toggleSidebar() {
+           const sidebar = document.getElementById('sidebar');
+           sidebar.classList.toggle('active'); // Toggle the sidebar visibility
+       }
+
+
+       function startGame() {
+           // Redirect to the game page or start the game logic
+           window.location.href = "game.html"; // Change to your game page URL
+       }
+   </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
