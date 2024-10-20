@@ -1,50 +1,53 @@
 <!DOCTYPE html>
-<html lang="">
-  <head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WashU GeoGuesser</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <title>Guess WashU - Explore the Campus!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="homeweb.css">
+</head>
+<body>
+    <header>
+        <div class="logo">GuessWashU</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="./instructions.html">Instructions</a></li>
+                <li><a href="#credits">Credits</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/10.14.1/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/10.14.1/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/10.14.1/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/10.14.1/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/10.14.1/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/10.14.1/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/10.14.1/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/10.14.1/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/10.14.1/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/10.14.1/firebase-performance-compat.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+    <main>
+        <h1>Guess WashU!</h1>
+        <p>Embark on a virtual journey through Washington University in St. Louis. Can you identify iconic locations across our beautiful campus?</p>
+        <button id="start-button" onclick="startGame()">Start Your Adventure</button>
+    </main>
 
-  </head>
-  <body>
-    <div id="map-container" class="map-container"> 
-      <div class="upperhalf">
-        <img id="realmap" class="js-image" src="">
-        <div id="map" class="js-map"></div>
-        <button class="js-submit">Submit</button>
-        <button class="js-switch-img intbtn">Show Map</button>
-        <p class="p-timer">1</p>
-      </div>  
-     <div class="lowerhalf">
-      <div class="toplowerhalf">
-        <button class="js-load-map intbtn">Load Map</button>
-        <button class="replay-button intbtn">Replay</button>
-      </div>
-     </div>
+    <div id="difficulty-popup" class="popup-overlay">
+        <div class="popup-content">
+            <h2>Choose Your Challenge</h2>
+            <button class="difficulty-button easy" onclick="selectDifficulty('easy')">Freshman Walk</button>
+            <button class="difficulty-button medium" onclick="selectDifficulty('medium')">Sophomore Stroll</button>
+            <button class="difficulty-button hard" onclick="selectDifficulty('hard')">Senior Sprint</button>
+            <button class="back-button" onclick="goBack()">Go Back</button>
+        </div>
     </div>
-    <script type="module" src="index.js"></script>
-  
-  </body>
+
+    <script>
+        function startGame() {
+            document.getElementById('difficulty-popup').style.display = 'block';
+        }
+
+        function selectDifficulty(difficulty) {
+            console.log('Selected difficulty:', difficulty);
+            window.location.href = `game.html?difficulty=${difficulty}`;
+        }
+
+        function goBack() {
+            document.getElementById('difficulty-popup').style.display = 'none';
+        }
+    </script>
+</body>
 </html>
