@@ -1,49 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Instructions - GeoGuessr</title>
-   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lobster&display=swap" rel="stylesheet">
-   <style>
-       body {
-           font-family: 'Roboto', sans-serif;
-           text-align: center;
-           padding: 50px;
-           background-color: #f5f5f5;
-           color: #333;
-       }
-       h1 {
-           font-family: 'Roboto', cursive;
-           font-size: 3rem;
-           margin-bottom: 20px;
-       }
-       p {
-           font-size: 1.5rem;
-           margin-bottom: 20px;
-       }
-       a {
-           display: inline-block;
-           margin-top: 20px;
-           font-size: 1.2rem;
-           text-decoration: none;
-           color: #007bff;
-       }
-       a:hover {
-           text-decoration: underline;
-       }
-   </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructions - Guess WashU</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://admissionsight.com/wp-content/uploads/2022/02/shutterstock_12403774.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        header {
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .instruction-container {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease-out 0.3s;
+            animation-fill-mode: both;
+        }
+
+        .instruction {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            opacity: 0;
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+
+        .instruction:nth-child(1) { animation-delay: 0.5s; }
+        .instruction:nth-child(2) { animation-delay: 0.7s; }
+        .instruction:nth-child(3) { animation-delay: 0.9s; }
+        .instruction:nth-child(4) { animation-delay: 1.1s; }
+        .instruction:nth-child(5) { animation-delay: 1.3s; }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 30px;
+            font-size: 1.2rem;
+            text-decoration: none;
+            color: #ffd700;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 12px 25px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out 1.5s;
+            animation-fill-mode: both;
+        }
+
+        .back-button:hover {
+            background-color: #ffd700;
+            color: #000000;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .instruction-container {
+                padding: 30px;
+            }
+
+            .instruction {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-   <h1>Instructions</h1>
-   <p>Welcome to Guess WashU!</p>
-   <p>Your goal is to guess your location in WashU based on a given image.</p>
-   <p>Explore the picture, gather clues, and make your guess!</p>
-   <p>Drop your marker and confirm your guess</p>
-   <p>Your score will be based on how fast you answer and how close you were. A 1000 is a perfect score!</p>
-   <a href="homeweb.html">Back to Home</a>
+    <header>
+        <h1>How to Play</h1>
+    </header>
+
+    <div class="instruction-container">
+        <p class="instruction">Welcome to Guess WashU! Embark on a virtual tour of Washington University in St. Louis.</p>
+        <p class="instruction">Your mission: Identify your location on campus based on the image presented.</p>
+        <p class="instruction">Analyze the picture carefully, look for distinctive landmarks, and gather clues about your surroundings.</p>
+        <p class="instruction">When you're ready, place your marker on the map and confirm your guess.</p>
+        <p class="instruction">Your score is based on accuracy and speed. Aim for a perfect 1000 points!</p>
+    </div>
+
+    <a href="homeweb.html" class="back-button">Return to Home</a>
 </body>
 </html>
-
-
-
