@@ -152,7 +152,7 @@ let timerIntervalDone;
         timeRemaining = 31;
        }
        else if (difficulty==='hard') {
-        timeRemaining = 16;
+        timeRemaining = 11;
        }
  
 
@@ -205,8 +205,8 @@ function haversine_distance(realLat, realLng, mk2) { //RealMarker(split into its
     document.querySelector('.js-submit').classList.add('invisible');
     document.querySelector('.js-switch-img').classList.add('invisible');
     document.querySelector('.replay-button').classList.remove('invisible');
-
-    
+    document.querySelector('.popup-overlay').classList.remove('invisible');
+      document.getElementById('difficulty-popup').style.display = 'block';
 
     clearInterval(timerIntervalDone);
     try{
@@ -239,7 +239,7 @@ function haversine_distance(realLat, realLng, mk2) { //RealMarker(split into its
   
     line.setMap(map);
     
-   
+
     async function animateZoom(duration) {
       map.setCenter({
         lat: (Number(dataValue.latitude) + lastKnownMarkerVals.lat) / 2,
@@ -269,13 +269,15 @@ function haversine_distance(realLat, realLng, mk2) { //RealMarker(split into its
     let d = haversine_distance(Number(dataValue.latitude), Number(dataValue.longitude), lastKnownMarkerVals);
 
    const test = calculateScore(d,timeUsed);
-   console.log(test);
+   document.querySelector('.popup-score').innerHTML = `${test}/1000`;
   }
   catch {
     const test = calculateScore(1, 0);
-   console.log(test);
+    document.querySelector('.popup-score').innerHTML = `${test}/1000`;
   }
   };
+
+
 
 });
 
@@ -288,3 +290,15 @@ document.querySelector('.js-switch-img').addEventListener('click', () => {
 document.querySelector('.replay-button').addEventListener('click', () => {
   location.reload();
 });
+
+document.querySelector('.back-button').addEventListener('click', () => {
+  document.getElementById('difficulty-popup').style.display = 'none';
+  document.querySelector('.continue-button').classList.remove('invisible');
+});
+
+document.querySelector('.continue-button').addEventListener('click', () => {
+  document.getElementById('difficulty-popup').style.display = 'block';
+  location.reload();
+});
+
+

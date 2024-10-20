@@ -143,3 +143,65 @@ body {
   border-style:solid;
   z-index: 101;
 }
+
+.popup-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 2000;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.popup-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 40px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  animation: scaleIn 0.3s ease-out;
+}
+.popup-title {
+  font-size: 18px;
+}
+
+.popup-score {
+  font-size: 24px;
+}
+
+.back-button {
+  padding: 10px 50px;
+  border: none;
+  background-color: rgb(52, 87, 200);
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 18px;
+  margin-top: 6px;
+}
+.continue-button {
+  padding: 10px 50px;
+  border: none;
+  background-color: rgb(52, 87, 200);
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 18px;
+  margin-top: 6px;
+}
+
+.continue-button:hover {
+  background-color: rgb(40, 70, 180);
+}
+
+.back-button:hover {
+  background-color: rgb(40, 70, 180);
+}
