@@ -67,6 +67,7 @@ document.addEventListener("DOMContentLoaded", async event => {
   const doc = await pickRandomPlace().get();
   const data = doc.data();
 
+
   let map;
   let mark;
   let lastKnownMarkerVals;
@@ -85,22 +86,16 @@ document.addEventListener("DOMContentLoaded", async event => {
         map: map
       });
   }
-
    
   dataValue.parse(data.data); //dataValue object holds picture location data
-
-
-  document.querySelector('.js-load-map').addEventListener('click', () => { //on clicking the load map button
-  
    
   const urlParams = new URLSearchParams(window.location.search);
 
-
   const difficulty = urlParams.get('difficulty');
-
+  document.querySelector('.p-timer').classList.remove('invisible');
     startTimer(difficulty);
     loadMap(dataValue.latitude, dataValue.longitude, dataValue.h, dataValue.t, dataValue.y);
-  });
+
 
   
 
@@ -142,19 +137,22 @@ document.addEventListener("DOMContentLoaded", async event => {
     submitButtonClicked();
   });
 
-  let timerInterval;
-  let timeRemaining;
+let timerIntervalDone;
+  let timeUsed;
 // Function to start a two-minute countdown timer
  function startTimer(difficulty) {
+  let timeRemaining;
+  let timerInterval;
       if (difficulty==='easy') {
-        timeRemaining = 60;
+        timeRemaining = 61;
        }
        else if (difficulty==='medium') {
-        timeRemaining = 30;
+        timeRemaining = 31;
        }
        else if (difficulty==='hard') {
-        timeRemaining = 15;
+        timeRemaining = 16;
        }
+ 
 
      timerInterval = setInterval(() => {
         const minutes = Math.floor(timeRemaining / 60); // Get remaining minutes
@@ -170,6 +168,8 @@ document.addEventListener("DOMContentLoaded", async event => {
 
         // Decrease timeRemaining each second
         timeRemaining--;
+        timeUsed = timeRemaining;
+        timerIntervalDone = timerInterval;
         document.querySelector('.p-timer').innerHTML = `${timeRemaining}`;
         // Stop the timer when it reaches zero
         if (timeRemaining <= 0) {
@@ -214,12 +214,11 @@ function haversine_distance(realLat, realLng, mk2) { //RealMarker(split into its
 
    async function submitButtonClicked() {
     document.querySelector('.js-submit').classList.add('invisible');
-    document.querySelector('.js-load-map').classList.add('invisible');
     document.querySelector('.js-switch-img').classList.add('invisible');
 
     
 
-    clearInterval(timerInterval);
+    clearInterval(timerIntervalDone);
     try{
     const linePlan = [
       { lat: Number(dataValue.latitude), lng: Number(dataValue.longitude) }, 
@@ -279,7 +278,7 @@ function haversine_distance(realLat, realLng, mk2) { //RealMarker(split into its
 
     let d = haversine_distance(Number(dataValue.latitude), Number(dataValue.longitude), lastKnownMarkerVals);
 
-   const test = calculateScore(d,timeRemaining);
+   const test = calculateScore(d,timeUsed);
    console.log(test);
   }
   catch {
@@ -290,9 +289,7 @@ function haversine_distance(realLat, realLng, mk2) { //RealMarker(split into its
 
 });
 
-document.querySelector('.js-load-map').addEventListener('click', () => {
-    loadMap();
-});
+
 
 document.querySelector('.js-switch-img').addEventListener('click', () => {
   switchImage();
