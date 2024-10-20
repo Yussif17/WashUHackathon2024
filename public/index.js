@@ -117,7 +117,8 @@ document.addEventListener("DOMContentLoaded", async event => {
       zoom: 15.2,
       streetViewControl: false,
       mapTypeControl: false,
-      clickableIcons: false
+      clickableIcons: false,
+      fullscreenControl: false
     });
 
     const marker = await map.addListener("click", (event) => {
@@ -203,6 +204,7 @@ function haversine_distance(realLat, realLng, mk2) { //RealMarker(split into its
    async function submitButtonClicked() {
     document.querySelector('.js-submit').classList.add('invisible');
     document.querySelector('.js-switch-img').classList.add('invisible');
+    document.querySelector('.replay-button').classList.remove('invisible');
 
     
 
