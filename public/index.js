@@ -3,8 +3,6 @@ import { loadMap, switchImage } from "./mapfunctions.js";
 
 
 document.addEventListener("DOMContentLoaded", async event => {
-  
-
 
   document.querySelector('.js-map').classList.add('invisible');
 
@@ -90,6 +88,10 @@ document.addEventListener("DOMContentLoaded", async event => {
 
 
   document.querySelector('.js-load-map').addEventListener('click', () => { //on clicking the load map button
+  
+
+
+    startTimer();
     loadMap(dataValue.latitude, dataValue.longitude, dataValue.h, dataValue.t, dataValue.y);
   });
 
@@ -130,10 +132,83 @@ document.addEventListener("DOMContentLoaded", async event => {
 
 
   document.querySelector('.js-submit').addEventListener('click',  async () => {
+    submitButtonClicked();
+  });
+
+
+
+  let timeTaken;
+  let timerInterval;
+  let timeRemaining;
+// Function to start a two-minute countdown timer
+ function startTimer(startTime=60) {
+     timeRemaining = startTime; 
+
+     timerInterval = setInterval(() => {
+        const minutes = Math.floor(timeRemaining / 60); // Get remaining minutes
+        const seconds = timeRemaining % 60; // Get remaining seconds
+
+        // Pad seconds with a leading zero if needed (e.g., 01, 02, ...)
+        const formattedSeconds = seconds < 10 ? '0' + seconds : seconds;
+
+        //format to (min:sec) and display (for every second)
+
+        // Update the display element with the remaining time
+        //displayElement.textContent = `${minutes}:${formattedSeconds}`;
+
+        // Decrease timeRemaining each second
+        timeRemaining--;
+        document.querySelector('.p-timer').innerHTML = `${timeRemaining}`;
+        // Stop the timer when it reaches zero
+        if (timeRemaining <= 0) {
+            clearInterval(timerInterval); // Stop the timer
+            //alert('Time’s up!'); 
+            submitButtonClicked();
+        }
+    }, 1000); // Update every 1 second (1000ms)
+}
+
+
+function haversine_distance(realLat, realLng, mk2) { //RealMarker(split into its own lat and lng) , InputMarker
+    var R = 3958.8; // Radius of the Earth in miles
+    var rlat1 =realLat * (Math.PI/180); // Convert degrees to radians
+    var rlat2 = mk2.lat * (Math.PI/180); // Convert degrees to radians
+    var difflat = rlat2-rlat1; // Radian difference (latitudes)
+    var difflon = (mk2.lng-realLng) * (Math.PI/180); // Radian difference (longitudes)
+
+    var d = 2 * R * Math.asin(Math.sqrt(Math.sin(difflat/2)*Math.sin(difflat/2)+Math.cos(rlat1)*Math.cos(rlat2)*Math.sin(difflon/2)*Math.sin(difflon/2))); // in miles
+    console.log(d);//for debugging
+    return d;
+  }
+
+  function calculateScore(D, t, D_max = 1, t_max =60, alpha = 0.65, beta = 0.35) {
+    // Ensure distance and time are within valid ranges
+    D = Math.min(D, D_max);
+    t = Math.min(t, t_max);
+  
+    // Calculate the distance and time factors
+    const distanceFactor = 1 - D / D_max;
+    const timeFactor = 1 - (60 - t) / t_max;
+    const weightedScore = alpha * distanceFactor + beta * timeFactor;
+  
+    // Calculate the final score, capped between 0 and 1000
+    const score = Math.max(0, Math.round(1000 * weightedScore));
+  
+    return score;
+  }
+  
+  
+  
+
+   async function submitButtonClicked() {
     document.querySelector('.js-submit').classList.add('invisible');
     document.querySelector('.js-load-map').classList.add('invisible');
     document.querySelector('.js-switch-img').classList.add('invisible');
 
+    
+
+    clearInterval(timerInterval);
+    try{
     const linePlan = [
       { lat: Number(dataValue.latitude), lng: Number(dataValue.longitude) }, 
       { lat: lastKnownMarkerVals.lat, lng: lastKnownMarkerVals.lng }, 
@@ -164,7 +239,18 @@ document.addEventListener("DOMContentLoaded", async event => {
     line.setMap(map);
 
     google.maps.event.clearListeners(map);
-  });
+
+    let d = haversine_distance(Number(dataValue.latitude), Number(dataValue.longitude), lastKnownMarkerVals);
+
+   const test = calculateScore(d,timeRemaining);
+   console.log(test);
+  }
+  catch {
+    const test = calculateScore(1, 0);
+   console.log(test);
+  }
+  };
+
 });
 
 document.querySelector('.js-load-map').addEventListener('click', () => {
@@ -173,9 +259,8 @@ document.querySelector('.js-load-map').addEventListener('click', () => {
 
 document.querySelector('.js-switch-img').addEventListener('click', () => {
   switchImage();
-})
+});
 
-
-
-
-
+document.querySelector('.replay-button').addEventListener('click', () => {
+  location.reload();
+});

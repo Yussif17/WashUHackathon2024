@@ -1,6 +1,6 @@
 /* General body styling */
 body {
-  font-family: Arial;
+  font-family: Roboto, Arial;
   height: 100vh;
   margin: 0;
   background-color: #f1f1f1;
@@ -109,4 +109,21 @@ body {
   opacity: 0;
   width: 0;
   height: 0;
+}
+
+.p-timer {
+  background-color: rgb(255, 255, 255);
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-left: 5px;
+  margin-top: 5px;
+  color: rgb(0, 0, 0);
+  font-size: 36px;
+  border-radius: 50px;
+  padding: 10px 20px;
+  border-color: rgb(255, 0, 0);
+  border-width: 5px;
+  border-style:solid;
+  z-index: 101;
 }
