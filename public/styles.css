@@ -1,11 +1,22 @@
+
 /* General body styling */
 body {
   font-family: Roboto, Arial;
   height: 100vh;
   margin: 0;
-  background-color: #f1f1f1;
+  background-color: rgb(38, 38, 38);
   display: grid;
-  place-items: center; /* Center the entire map-container within the body */
+  grid-template-columns: 1fr 15fr;
+
+}
+
+#main-page {
+  display: flex;
+  place-items: center;
+  justify-content: center;
+  grid-column: 2;
+  width: 100%;
+  height: 100%;
 }
 
 /* Map container styling */
@@ -15,7 +26,7 @@ body {
   width: 85%; /* Adjust to control the map container size */ 
   height: 95%;
    /* Optional shadow for better visuals */
-  background-color: white; /* Background for the map container */
+   /* Background for the map container */
 }
 .js-map-container {
   height: 85%;
@@ -23,7 +34,8 @@ body {
   grid-template-rows: 1fr; /* Upper and lower halves */
   width: 85%; /* Adjust to control the map container size */ 
    /* Optional shadow for better visuals */
-  background-color: white; /* Background for the map container */
+   /* Background for the map container */
+  background-color: rgb(38, 38, 38);
 }
 
 /* Upper half containing the map and image */
@@ -37,6 +49,48 @@ body {
   border: 1px solid black;
   border-radius: 8px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+#logo img {
+  width: 100%;
+  grid-template-rows: 1;
+  padding-bottom: 0px;
+}
+
+.left {
+  background-color: rgb(97, 8, 8);
+  grid-column: 1;
+  justify-content: space-between;
+  display: grid;
+  grid-template-rows: 1fr 7fr;
+  border: 1px solid rgba(0, 0, 0, 0.558);
+}
+
+.left nav ul {
+  padding: 0px 5px 0px 5px;
+  display:list-item;
+  text-decoration: none;
+  list-style-type: none;
+  grid-template-columns: 2;
+  margin: 0px;
+}
+
+.left nav ul li{
+  padding: left;
+  text-decoration: none;
+  text-align: center;
+  padding: 10px 0px 5px 0px; 
+  border-bottom: 3px solid rgba(0, 0, 0, 0.251);
+
+}
+
+.left nav ul li a {
+  color: #ffffffd4;
+  text-decoration: none;
+}
+
+.left nav ul li a:hover {
+  color: #ffffffa7;
 }
 
 #map, 
@@ -54,7 +108,7 @@ body {
   justify-content: center; /* Center the buttons horizontally */
   align-items: center; /* Center the buttons vertically */
   gap: 10px; /* Add space between the buttons */
-  background-color: #f1f1f1;
+  background-color: rgb(38, 38, 38);
 }
 
 .toplowerhalf {

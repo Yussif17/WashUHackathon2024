@@ -20,7 +20,7 @@ body {
 
 /* Header Styles */
 header {
-    padding: 20px;
+ 
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -35,15 +35,26 @@ header {
     font-size: 2rem;
     color: #ff0000;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    padding: 10px;
+}
+
+.logo img {
+    margin-left: 10px;
+    height: 60px;
 }
 
 nav ul {
+    padding: 10px;
     display: flex;
-    list-style: none;
+    list-style-type: none;
 }
 
 nav ul li {
-    margin-left: 30px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-left: 1px solid #333;
+    border-right: 1px solid #333;
+    list-style-type: none;
 }
 
 nav ul li a {
@@ -51,6 +62,7 @@ nav ul li a {
     text-decoration: none;
     font-size: 1.1rem;
     transition: color 0.3s ease;
+    list-style-type: none;
 }
 
 nav ul li a:hover {
@@ -175,6 +187,8 @@ p {
 .back-button:hover {
     background-color: #555;
 }
+
+
 
 /* Animations */
 @keyframes fadeInUp {
