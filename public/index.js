@@ -4,9 +4,6 @@ import { submitButton } from "./submit.js";
 
 document.addEventListener("DOMContentLoaded", async event => {
   
-  document.querySelector('.js-submit').addEventListener('click', () => {
-    submitButton();
-  });
 
 
   document.querySelector('.js-map').classList.add('invisible');
