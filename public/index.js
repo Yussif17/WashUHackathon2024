@@ -14,8 +14,8 @@ document.addEventListener("DOMContentLoaded", async event => {
   }
   class dataValues {
     constructor() {
-      this.longitude = '';
       this.latitude = '';
+      this.longitude = '';
       this.a = '';
       this.y = '';
       this.h = '';
@@ -26,12 +26,12 @@ document.addEventListener("DOMContentLoaded", async event => {
       let i = 0;
   
       while (url[i] != ',') {
-        this.longitude += url[i];
+        this.latitude += url[i];
         i++;
       }
       i++;
       while (url[i] != ',') {
-        this.latitude += url[i];
+        this.longitude += url[i];
         i++
       }
       i++;
@@ -80,14 +80,14 @@ document.addEventListener("DOMContentLoaded", async event => {
         position: location,
         map: map
       });
-    }
+  }
 
    
   dataValue.parse(data.data); //dataValue object holds picture location data
 
+
   document.querySelector('.js-load-map').addEventListener('click', () => { //on clicking the load map button
-    loadMap(dataValue.longitude, dataValue.latitude, dataValue.h, dataValue.t, dataValue.y);
-    console.log(dataValue); //to debug
+    loadMap(dataValue.latitude, dataValue.longitude, dataValue.h, dataValue.t, dataValue.y);
   });
 
   
@@ -120,18 +120,48 @@ document.addEventListener("DOMContentLoaded", async event => {
       lastKnownMarkerVals = new markerValues(event.latLng.lat(), event.latLng.lng()); 
       //console.log(lastKnownMarkerVals); for debug (works properly)
     }); 
-  
-    
   }
   
 
  initMap(); //async function
 
 
+  document.querySelector('.js-submit').addEventListener('click',  async () => {
+    document.querySelector('.js-submit').classList.add('invisible');
+    document.querySelector('.js-load-map').classList.add('invisible');
+    document.querySelector('.js-switch-img').classList.add('invisible');
 
+    const linePlan = [
+      { lat: Number(dataValue.latitude), lng: Number(dataValue.longitude) }, 
+      { lat: lastKnownMarkerVals.lat, lng: lastKnownMarkerVals.lng }, 
+    ]
+
+    const image = {
+      url: './img/file.png',
+      size: new google.maps.Size(25, 29),
+      origin: new google.maps.Point(0, 0),
+      anchor: new google.maps.Point(13, 13)
+    } 
+
+    const originalPoint = new google.maps.Marker({
+      position: { lat: Number(dataValue.latitude), lng: Number(dataValue.longitude) },
+      map: map,
+      icon: image
+    })
+
+    const line = await new google.maps.Polyline({
+      path: linePlan,
+      geodesic: false,
+      strokeColor: '#000000',
+      strokeOpacity: 1.0,
+      strokeWeight: 2
+    });
 
   
+    line.setMap(map);
 
+    google.maps.event.clearListeners(map);
+  });
 });
 
 document.querySelector('.js-load-map').addEventListener('click', () => {

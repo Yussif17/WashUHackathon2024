@@ -1,15 +1,9 @@
 import { API_KEY } from "./config.js";
 
-let latitude = '38.6463999'; 
-let longitude =  '-90.3109969'; 
-let a =  '3'; 
-let y =  '75';
-let h =  '300.85'; 
-let t =  '86.49';  
 
-export function loadMap(long, lat, h, t) {
+export function loadMap(lat, long, h, t) {
 
-  const mapUrl = `https://maps.googleapis.com/maps/api/streetview?location=${long},${lat}&size=600x400&heading=${h}&pitch=${90 - t}&fov=120&key=${API_KEY}`;
+  const mapUrl = `https://maps.googleapis.com/maps/api/streetview?location=${lat},${long}&size=600x400&heading=${h}&pitch=${90 - t}&fov=100&key=${API_KEY}`;
    
   document.getElementById('realmap').src = mapUrl;
 };

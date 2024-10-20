@@ -48,7 +48,7 @@ body {
 }
 
 /* Button styling */
-.js-switch-img, .js-load-map {
+.js-switch-img, .js-load-map, .js-submit {
   padding: 10px;
   border: none;
   background-color: rgb(52, 87, 200);
