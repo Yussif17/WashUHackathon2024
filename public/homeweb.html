@@ -1,181 +1,287 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>GeoGuessr - Explore the World!</title>
-   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lobster&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-   <style>
-       body {
-           font-family: 'Times New Roman', sans-serif;
-           background-image: url('https://admissionsight.com/wp-content/uploads/2022/02/shutterstock_12403774.jpg'); /* WashU background image */
-           background-size: cover;
-           background-position: center;
-           color: rgb(12, 180, 6);
-           text-align: center;
-           padding: 50px;
-           height: 100vh;
-           display: flex;
-           margin: 0;
-           overflow: hidden; /* Hide overflow for a cleaner look */
-       }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess WashU - Explore the Campus!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://admissionsight.com/wp-content/uploads/2022/02/shutterstock_12403774.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
 
-       h1 {
-           font-weight: bold;
-           -webkit-text-stroke-width: 1px;
-           -webkit-text-stroke-color: black;
-       }
+        /* Header Styles */
+        header {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
 
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #ff0000;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
 
-       #start-button {
-          
-       }
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
 
+        nav ul li {
+            margin-left: 30px;
+        }
 
-       p {
-           color: rgb(12, 180, 6);
-           text-align: center;
-          
-       }
-       /* Sidebar Styles */
-       #sidebar {
-           width: 250px; /* Width of the sidebar */
-           background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
-           padding: 30px;
-           position: fixed; /* Fixed positioning */
-           top: 0;
-           left: -210px; /* Start hidden */
-           height: 100%; /* Full height */
-           box-shadow: 2px 0 20px rgba(0, 0, 0, 0.5);
-           transition: left 0.3s ease; /* Smooth slide in/out transition */
-       }
-       #sidebar.active {
-           left: 0; /* Show the sidebar */
-       }
-       #sidebar h2 {
-           font-family: 'Times New Roman', cursive;
-           color: rgb(252, 250, 250); /* Menu color*/
-           font-size: 1.8rem; /* Slightly larger font size */
-           text-align: center;
-           margin-bottom: 20px;
-       }
-       #sidebar a {
-           display: block;
-           color: rgb(255, 252, 252);
-           text-decoration: none;
-           margin: 15px 0;
-           text-align: center;
-           font-size: 1.3rem;
-           padding: 10px 0;
-           transition: background-color 0.3s ease; /* Smooth background transition */
-       }
-       #sidebar a:hover {
-           background-color: rgba(255, 0, 0, 0.8); /* Red background on hover */
-           border-radius: 5px; /* Rounded corners on hover */
-       }
-       /* Hamburger Menu Styles */
-       #hamburger {
-           position: fixed;
-           top: 20px;
-           left: 20px;
-           cursor: pointer;
-           z-index: 10; /* Ensures it's on top of other content */
-       }
-       #hamburger div {
-           width: 30px;
-           height: 4px;
-           background-color: white;
-           margin: 5px;
-           transition: all 0.3s ease; /* Smooth transition for bars */
-       }
-       /* Main Content Styles */
-       #main-content {
-           margin-left: 270px; /* Leave space for the sidebar */
-           flex-grow: 1; /* Allow the content to take the remaining space */
-           display: flex;
-           flex-direction: column;
-           justify-content: center;
-           align-items: center;
-           transition: margin-left 0.3s ease; /* Smooth transition for content */
-       }
-       h1 {
-           font-family: 'Times New Roman', cursive;
-           font-size: 3.5rem;
-           margin-bottom: 20px;
-           text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-       }
-       p {
-           font-family: 'Montserrat', sans-serif; /* Changed font to Montserrat */
-           font-size: 1.8rem; /* Increased font size */
-           margin-bottom: 30px;
-           text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-           line-height: 1.4; /* Improved line height for readability */
-       }
-       #start-button {
-           background-color: rgba(255, 0, 0, 0.9); /* More opaque red */
-           color: rgb(0, 0, 0);
-           border: none;
-           padding: 15px 30px;
-           font-size: 1.6rem;
-           font-family: 'Times New Roman', cursive; /* Using Lobster font for the button */
-           cursor: pointer;
-           border-radius: 5px;
-           transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
-           box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-       }
-       #start-button:hover {
-           background-color: rgba(200, 0, 0, 0.9); /* Darker red on hover */
-           transform: scale(1.1); /* Slightly enlarge the button on hover */
-       }
-   </style>
+        nav ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #ff0000;
+        }
+
+        /* Main Content Styles */
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            max-width: 800px;
+            line-height: 1.6;
+            animation: fadeInUp 1s ease-out 0.5s;
+            animation-fill-mode: both;
+        }
+
+        #start-button {
+            background-color: #fc0303;
+            color: #000000;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease-out 1s;
+            animation-fill-mode: both;
+        }
+
+        #start-button:hover {
+            background-color: #ffffff;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Pop-up Styles */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .popup-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            animation: scaleIn 0.3s ease-out;
+        }
+
+        .popup-content h2 {
+            color: #000000;
+            margin-bottom: 30px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .difficulty-button {
+            display: block;
+            width: 100%;
+            margin: 15px 0;
+            padding: 15px;
+            font-size: 1.2rem;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            border: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .difficulty-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .easy { background-color: #4CAF50; color: white; }
+        .medium { background-color: #FFC107; color: black; }
+        .hard { background-color: #F44336; color: white; }
+
+        .back-button {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #555;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            nav ul {
+                margin-top: 15px;
+            }
+
+            nav ul li {
+                margin-left: 15px;
+            }
+
+            h1 {
+                font-size: 3rem;
+            }
+
+            p {
+                font-size: 1.2rem;
+            }
+
+            #start-button {
+                font-size: 1.2rem;
+                padding: 12px 30px;
+            }
+        }
+    </style>
 </head>
 <body>
-   <!-- Hamburger Menu Icon -->
-   <div id="hamburger" onclick="toggleSidebar()">
-       <div></div>
-       <div></div>
-       <div></div>
-   </div>
+    <header>
+        <div class="logo">GuessWashU</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#instructions.html">Instructions</a></li>
+                <li><a href="#credits">Credits</a></li>
+            </ul>
+        </nav>
+    </header>
 
+    <main>
+        <h1>Guess WashU!</h1>
+        <p>Embark on a virtual journey through Washington University in St. Louis. Can you identify iconic locations across our beautiful campus?</p>
+        <button id="start-button" onclick="startGame()">Start Your Adventure</button>
+    </main>
 
-   <!-- Sidebar -->
-   <div id="sidebar">
-       <h2>Menu</h2>
-       <a href="homeweb.html">Home</a>
-       <a href="instructions.html">Instructions</a> <!-- New Instructions link -->
-       <a href="credits.html">Credits</a>
-   </div>
+    <div id="difficulty-popup" class="popup-overlay">
+        <div class="popup-content">
+            <h2>Choose Your Challenge</h2>
+            <button class="difficulty-button easy" onclick="selectDifficulty('easy')">Freshman Walk</button>
+            <button class="difficulty-button medium" onclick="selectDifficulty('medium')">Sophomore Stroll</button>
+            <button class="difficulty-button hard" onclick="selectDifficulty('hard')">Senior Sprint</button>
+            <button class="back-button" onclick="goBack()">Go Back</button>
+        </div>
+    </div>
 
+    <script>
+        function startGame() {
+            document.getElementById('difficulty-popup').style.display = 'block';
+        }
 
-   <!-- Main Content -->
-   <div id="main-content">
-       <h1>Welcome to Guess WashU!</h1>
-       <p>Can you guess where you are in WashU?</p>
-       <button id="start-button" onclick="startGame()">Start Game</button>
-   </div>
+        function selectDifficulty(difficulty) {
+            console.log('Selected difficulty:', difficulty);
+            window.location.href = `game.html?difficulty=${difficulty}`;
+        }
 
-
-   <script>
-       function toggleSidebar() {
-           const sidebar = document.getElementById('sidebar');
-           sidebar.classList.toggle('active'); // Toggle the sidebar visibility
-       }
-
-
-       function startGame() {
-           // Redirect to the game page or start the game logic
-           window.location.href = "game.html"; // Change to your game page URL
-       }
-   </script>
+        function goBack() {
+            document.getElementById('difficulty-popup').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-

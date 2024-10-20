@@ -237,6 +237,31 @@ function haversine_distance(realLat, realLng, mk2) { //RealMarker(split into its
 
   
     line.setMap(map);
+    
+    let zoomLevel = map.getZoom();
+    async function animateZoom(duration) {
+      map.setCenter({
+        lat: (Number(dataValue.latitude) + lastKnownMarkerVals.lat) / 2,
+        lng: (Number(dataValue.longitude) + lastKnownMarkerVals.lng) / 2
+      });
+      const startZoom = map.getZoom();
+      const steps = 50;
+      const stepDuration = duration / steps;
+      let currentStep = 0;
+  
+      async function step() {
+        currentStep++;
+        if (currentStep <= steps) {
+          const zoomDiff = duration - startZoom;
+          const newZoom = startZoom + (zoomDiff * currentStep / steps);
+          map.setZoom(newZoom);
+          setTimeout(step, stepDuration);
+        }
+      }
+  
+      await step();
+    }
+    animateZoom(65);
 
     google.maps.event.clearListeners(map);
 
