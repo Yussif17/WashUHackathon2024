@@ -2,8 +2,11 @@ import { API_KEY } from "./config.js";
 import { loadMap, switchImage } from "./mapfunctions.js";
 
 
-document.addEventListener("DOMContentLoaded", async event => {
 
+
+document.addEventListener("DOMContentLoaded", async event => {
+  
+  
   document.querySelector('.js-map').classList.add('invisible');
 
   class markerValues {
@@ -89,9 +92,13 @@ document.addEventListener("DOMContentLoaded", async event => {
 
   document.querySelector('.js-load-map').addEventListener('click', () => { //on clicking the load map button
   
+   
+  const urlParams = new URLSearchParams(window.location.search);
 
 
-    startTimer();
+  const difficulty = urlParams.get('difficulty');
+
+    startTimer(difficulty);
     loadMap(dataValue.latitude, dataValue.longitude, dataValue.h, dataValue.t, dataValue.y);
   });
 
@@ -138,8 +145,16 @@ document.addEventListener("DOMContentLoaded", async event => {
   let timerInterval;
   let timeRemaining;
 // Function to start a two-minute countdown timer
- function startTimer(startTime=60) {
-     timeRemaining = startTime; 
+ function startTimer(difficulty) {
+      if (difficulty==='easy') {
+        timeRemaining = 60;
+       }
+       else if (difficulty==='medium') {
+        timeRemaining = 30;
+       }
+       else if (difficulty==='hard') {
+        timeRemaining = 15;
+       }
 
      timerInterval = setInterval(() => {
         const minutes = Math.floor(timeRemaining / 60); // Get remaining minutes
