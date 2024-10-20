@@ -9,14 +9,20 @@ body {
 }
 
 /* Map container styling */
-#map-container {
+.map-container {
   display: grid;
-  grid-template-rows: 3fr 1fr; /* Upper and lower halves */
-  width: 80%; /* Adjust to control the map container size */
-  height: 80%; /* Adjust the height to fit nicely */
-  border: 1px solid black;
-  border-radius: 8px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Optional shadow for better visuals */
+  grid-template-rows: 3fr 50px; /* Upper and lower halves */
+  width: 85%; /* Adjust to control the map container size */ 
+  height: 95%;
+   /* Optional shadow for better visuals */
+  background-color: white; /* Background for the map container */
+}
+.js-map-container {
+  height: 85%;
+  display: grid;
+  grid-template-rows: 1fr; /* Upper and lower halves */
+  width: 85%; /* Adjust to control the map container size */ 
+   /* Optional shadow for better visuals */
   background-color: white; /* Background for the map container */
 }
 
@@ -24,10 +30,13 @@ body {
 .upperhalf {
   display: grid;
   grid-template-columns: 1fr; /* Use a single column layout */
-  place-items: center; /* Center content inside upper half */
+  /* Center content inside upper half */
   height: 100%; /* Ensure it fills its parent row */
   width: 100%;
   position: relative; /* Make sure elements stack properly */
+  border: 1px solid black;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
 #map, 
@@ -45,6 +54,18 @@ body {
   justify-content: center; /* Center the buttons horizontally */
   align-items: center; /* Center the buttons vertically */
   gap: 10px; /* Add space between the buttons */
+  background-color: #f1f1f1;
+}
+
+.toplowerhalf {
+  height: 50px;
+  display: flex;
+  justify-content: center; /* Center the buttons horizontally */
+  align-items: center; /* Center the buttons vertically */
+  gap: 10px;
+}
+.lowerlowerhalf {
+  background-color: #f1f1f1;
 }
 
 /* Button styling */
@@ -55,11 +76,32 @@ body {
   color: white;
   cursor: pointer;
   border-radius: 4px;
-  transition: background-color 0.3s;
+  z-index: 100;
 }
 
-button:hover {
+.js-switch-img {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  font-size: 20px;
+}
+
+.js-submit {
+  background-color: rgb(22, 145, 22);
+  font-size: 20px;
+  position: absolute;
+  bottom: 0;
+  left: 40%;
+  right: 40%;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.intbtn:hover {
   background-color: rgb(40, 70, 180);
+}
+.js-submit:hover {
+  background-color: rgb(42, 165, 42);
 }
 
 /* Invisible class styling */
