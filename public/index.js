@@ -6,6 +6,9 @@ import { loadMap, switchImage } from "./mapfunctions.js";
 
 document.addEventListener("DOMContentLoaded", async event => {
   
+  const urlParams = new URLSearchParams(window.location.search);
+
+  const difficulty = urlParams.get('difficulty');
   
   document.querySelector('.js-map').classList.add('invisible');
 
@@ -77,7 +80,8 @@ document.addEventListener("DOMContentLoaded", async event => {
   }
             
   function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
+    const rand = Math.random();
+    return Math.floor(rand * max);
   }
 
   function addMarker(location) {
@@ -90,9 +94,7 @@ document.addEventListener("DOMContentLoaded", async event => {
    
   dataValue.parse(data.data); //dataValue object holds picture location data
    
-  const urlParams = new URLSearchParams(window.location.search);
-
-  const difficulty = urlParams.get('difficulty');
+ 
   document.querySelector('.p-timer').classList.remove('invisible');
     startTimer(difficulty);
     loadMap(dataValue.latitude, dataValue.longitude, dataValue.h, dataValue.t, dataValue.y);
@@ -178,18 +180,26 @@ function haversine_distance(realLat, realLng, mk2) { //RealMarker(split into its
     var difflon = (mk2.lng-realLng) * (Math.PI/180); // Radian difference (longitudes)
 
     var d = 2 * R * Math.asin(Math.sqrt(Math.sin(difflat/2)*Math.sin(difflat/2)+Math.cos(rlat1)*Math.cos(rlat2)*Math.sin(difflon/2)*Math.sin(difflon/2))); // in miles
-    console.log(d);//for debugging
     return d;
   }
 
-  function calculateScore(D, t, D_max = 1, t_max =60, alpha = 0.65, beta = 0.35) {
+  function calculateScore(D, t, difficulty, D_max = .7, alpha = 0.65, beta = 0.35) {
     // Ensure distance and time are within valid ranges
     D = Math.min(D, D_max);
-    t = Math.min(t, t_max);
   
+    let timeAmount;
+    if (difficulty==='easy') {
+      timeAmount = 60;
+     }
+     else if (difficulty==='medium') {
+      timeAmount = 30;
+     }
+     else if (difficulty==='hard') {
+      timeAmount = 10;
+     }
     // Calculate the distance and time factors
     const distanceFactor = 1 - D / D_max;
-    const timeFactor = 1 - (60 - t) / t_max;
+    const timeFactor = 1 - (timeAmount - t) / timeAmount;
     const weightedScore = alpha * distanceFactor + beta * timeFactor;
   
     // Calculate the final score, capped between 0 and 1000
@@ -268,11 +278,11 @@ function haversine_distance(realLat, realLng, mk2) { //RealMarker(split into its
 
     let d = haversine_distance(Number(dataValue.latitude), Number(dataValue.longitude), lastKnownMarkerVals);
 
-   const test = calculateScore(d,timeUsed);
+   const test = calculateScore(d,timeUsed,difficulty);
    document.querySelector('.popup-score').innerHTML = `${test}/1000`;
   }
   catch {
-    const test = calculateScore(1, 0);
+    const test = calculateScore(1, 0,difficulty);
     document.querySelector('.popup-score').innerHTML = `${test}/1000`;
   }
   };
