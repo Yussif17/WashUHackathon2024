@@ -30,32 +30,28 @@
 
   </head>
   <body>
-    <div class="left">
-      <div id="logo">
-        <img src="./img/washuguesserlogo.png" alt="log">
+    <div id="difficulty-popup" class="popup-overlay">
+      <div class="popup-content">
+          <h2 class="popup-title">Your Score:</h2>
+          <p class="popup-score"></p>
+          <button class="replay-button intbtn invisible">Replay</button>
+          <button class="back-button">Go Back</button>
       </div>
-      <nav>
-        <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Instructions</a></li>
-        </ul>
-      </nav>
-    </div>
-    <div id="main-page">
-      <div id="map-container" class="map-container"> 
-        <div class="upperhalf">
-          <img id="realmap" class="js-image" src="">
-          <div id="map" class="js-map"></div>
-          <button class="js-submit">Submit</button>
-          <button class="js-switch-img intbtn">Show Map</button>
-          <p class="p-timer">1</p>
-        </div>  
-      <div class="lowerhalf">
-        <div class="toplowerhalf">
-          <button class="js-load-map intbtn">Load Map</button>
-          <button class="replay-button intbtn">Replay</button>
-        </div>
+  </div>
+    <div id="map-container" class="map-container"> 
+      <div class="upperhalf">
+        <img id="realmap" class="js-image" src="">
+        <div id="map" class="js-map"></div>
+        <button class="js-submit invisible">Submit</button>
+        <button class="js-switch-img intbtn">Show Map</button>
+        <p class="p-timer invisible"></p>
+      </div>  
+     <div class="lowerhalf">
+      <button class="continue-button invisible">Continue &#8594;</button>
+      <div class="toplowerhalf">
+
       </div>
+     </div>
     </div>
 
     <script type="module" src="index.js"></script>

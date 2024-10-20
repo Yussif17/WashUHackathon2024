@@ -28,24 +28,20 @@
         <button id="start-button" onclick="startGame()">Start Your Adventure</button>
     </main>
 
-    <div id="difficulty-popup" class="popup-overlay">
+    <div id="difficulty-popup" class="popup-overlay invisible">
         <div class="popup-content">
             <h2>Choose Your Challenge</h2>
-            <button class="difficulty-button easy" onclick="selectDifficulty('easy')">Freshman Walk</button>
-            <button class="difficulty-button medium" onclick="selectDifficulty('medium')">Sophomore Stroll</button>
-            <button class="difficulty-button hard" onclick="selectDifficulty('hard')">Senior Sprint</button>
+            <button class="difficulty-button easy" >Freshman Walk</button>
+            <button class="difficulty-button medium" >Sophomore Stroll</button>
+            <button class="difficulty-button hard" >Senior Sprint</button>
             <button class="back-button" onclick="goBack()">Go Back</button>
         </div>
     </div>
 
+    <script type="module" src="home.js"></script>
     <script>
         function startGame() {
             document.getElementById('difficulty-popup').style.display = 'block';
-        }
-
-        function selectDifficulty(difficulty) {
-            console.log('Selected difficulty:', difficulty);
-            window.location.href = `game.html?difficulty=${difficulty}`;
         }
 
         function goBack() {

@@ -2,8 +2,11 @@ import { API_KEY } from "./config.js";
 import { loadMap, switchImage } from "./mapfunctions.js";
 
 
-document.addEventListener("DOMContentLoaded", async event => {
 
+
+document.addEventListener("DOMContentLoaded", async event => {
+  
+  
   document.querySelector('.js-map').classList.add('invisible');
 
   class markerValues {
@@ -64,6 +67,7 @@ document.addEventListener("DOMContentLoaded", async event => {
   const doc = await pickRandomPlace().get();
   const data = doc.data();
 
+
   let map;
   let mark;
   let lastKnownMarkerVals;
@@ -77,23 +81,22 @@ document.addEventListener("DOMContentLoaded", async event => {
   }
 
   function addMarker(location) {
+    document.querySelector('.js-submit').classList.remove('invisible');
       return new google.maps.Marker({
         position: location,
         map: map
       });
   }
-
    
   dataValue.parse(data.data); //dataValue object holds picture location data
+   
+  const urlParams = new URLSearchParams(window.location.search);
 
-
-  document.querySelector('.js-load-map').addEventListener('click', () => { //on clicking the load map button
-  
-
-
-    startTimer();
+  const difficulty = urlParams.get('difficulty');
+  document.querySelector('.p-timer').classList.remove('invisible');
+    startTimer(difficulty);
     loadMap(dataValue.latitude, dataValue.longitude, dataValue.h, dataValue.t, dataValue.y);
-  });
+
 
   
 
@@ -114,7 +117,8 @@ document.addEventListener("DOMContentLoaded", async event => {
       zoom: 15.2,
       streetViewControl: false,
       mapTypeControl: false,
-      clickableIcons: false
+      clickableIcons: false,
+      fullscreenControl: false
     });
 
     const marker = await map.addListener("click", (event) => {
@@ -135,34 +139,34 @@ document.addEventListener("DOMContentLoaded", async event => {
     submitButtonClicked();
   });
 
-  let timerInterval;
-  let timeRemaining;
+let timerIntervalDone;
+  let timeUsed;
 // Function to start a two-minute countdown timer
- function startTimer(startTime=60) {
-     timeRemaining = startTime; 
+ function startTimer(difficulty) {
+  let timeRemaining;
+  let timerInterval;
+      if (difficulty==='easy') {
+        timeRemaining = 61;
+       }
+       else if (difficulty==='medium') {
+        timeRemaining = 31;
+       }
+       else if (difficulty==='hard') {
+        timeRemaining = 11;
+       }
+ 
 
      timerInterval = setInterval(() => {
-        const minutes = Math.floor(timeRemaining / 60); // Get remaining minutes
-        const seconds = timeRemaining % 60; // Get remaining seconds
-
-        // Pad seconds with a leading zero if needed (e.g., 01, 02, ...)
-        const formattedSeconds = seconds < 10 ? '0' + seconds : seconds;
-
-        //format to (min:sec) and display (for every second)
-
-        // Update the display element with the remaining time
-        //displayElement.textContent = `${minutes}:${formattedSeconds}`;
-
-        // Decrease timeRemaining each second
         timeRemaining--;
+        timeUsed = timeRemaining;
+        timerIntervalDone = timerInterval;
         document.querySelector('.p-timer').innerHTML = `${timeRemaining}`;
         // Stop the timer when it reaches zero
         if (timeRemaining <= 0) {
             clearInterval(timerInterval); // Stop the timer
-            //alert('Time’s up!'); 
             submitButtonClicked();
         }
-    }, 1000); // Update every 1 second (1000ms)
+    }, 1000); // Update every 1 second 
 }
 
 
@@ -199,12 +203,12 @@ function haversine_distance(realLat, realLng, mk2) { //RealMarker(split into its
 
    async function submitButtonClicked() {
     document.querySelector('.js-submit').classList.add('invisible');
-    document.querySelector('.js-load-map').classList.add('invisible');
     document.querySelector('.js-switch-img').classList.add('invisible');
+    document.querySelector('.replay-button').classList.remove('invisible');
+    document.querySelector('.popup-overlay').classList.remove('invisible');
+      document.getElementById('difficulty-popup').style.display = 'block';
 
-    
-
-    clearInterval(timerInterval);
+    clearInterval(timerIntervalDone);
     try{
     const linePlan = [
       { lat: Number(dataValue.latitude), lng: Number(dataValue.longitude) }, 
@@ -235,7 +239,7 @@ function haversine_distance(realLat, realLng, mk2) { //RealMarker(split into its
   
     line.setMap(map);
     
-   
+
     async function animateZoom(duration) {
       map.setCenter({
         lat: (Number(dataValue.latitude) + lastKnownMarkerVals.lat) / 2,
@@ -264,20 +268,20 @@ function haversine_distance(realLat, realLng, mk2) { //RealMarker(split into its
 
     let d = haversine_distance(Number(dataValue.latitude), Number(dataValue.longitude), lastKnownMarkerVals);
 
-   const test = calculateScore(d,timeRemaining);
-   console.log(test);
+   const test = calculateScore(d,timeUsed);
+   document.querySelector('.popup-score').innerHTML = `${test}/1000`;
   }
   catch {
     const test = calculateScore(1, 0);
-   console.log(test);
+    document.querySelector('.popup-score').innerHTML = `${test}/1000`;
   }
   };
 
+
+
 });
 
-document.querySelector('.js-load-map').addEventListener('click', () => {
-    loadMap();
-});
+
 
 document.querySelector('.js-switch-img').addEventListener('click', () => {
   switchImage();
@@ -286,3 +290,15 @@ document.querySelector('.js-switch-img').addEventListener('click', () => {
 document.querySelector('.replay-button').addEventListener('click', () => {
   location.reload();
 });
+
+document.querySelector('.back-button').addEventListener('click', () => {
+  document.getElementById('difficulty-popup').style.display = 'none';
+  document.querySelector('.continue-button').classList.remove('invisible');
+});
+
+document.querySelector('.continue-button').addEventListener('click', () => {
+  document.getElementById('difficulty-popup').style.display = 'block';
+  location.reload();
+});
+
+
