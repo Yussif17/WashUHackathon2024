@@ -26,16 +26,18 @@
 
   </head>
   <body>
-    <div id="map-container">
+    <div id="map-container" class="map-container"> 
       <div class="upperhalf">
-        <img id="realmap" class="js-image" src="" alt="Google Map">
+        <img id="realmap" class="js-image" src="">
         <div id="map" class="js-map"></div>
-      </div>
+        <button class="js-submit">Submit</button>
+        <button class="js-switch-img intbtn">Show Map</button>
+      </div>  
      <div class="lowerhalf">
-      <button class="js-load-map">Load Map</button>
-      <button class="js-switch-img">Show Map</button>
+      <div class="toplowerhalf">
+        <button class="js-load-map intbtn">Load Map</button>
+      </div>
      </div>
-
     </div>
     <script type="module" src="index.js"></script>
   
