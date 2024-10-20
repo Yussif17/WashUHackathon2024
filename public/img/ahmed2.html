@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Location Tracking and Random Street View</title>
+  <style>
+      #map, #street-view {
+          height: 400px;
+          width: 100%;
+          margin-bottom: 20px;
+      }
+  </style>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore-compat.js"></script>
+  <!-- Google Maps JavaScript API -->
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqn3OD-ydwEjf02SmCPdbMrPERh0uzuEE&callback=initMap"></script>
+</head>
+<body>
+  <h2>Live Location Tracking</h2>
+  <p id="location-status">Waiting for location updates...</p>
+  <div id="map"></div>
+
+
+  <h2>Random Street View Image</h2>
+  <div id="street-view"></div>
+  <button id="get-random-location">Get Random Street View</button>
+
+
+  <script>
+      let map, marker, streetView;
+
+
+      // Initialize the map
+      function initMap() {
+          const initialLocation = { lat: 40.7128, lng: -74.0060 };
+
+
+          map = new google.maps.Map(document.getElementById('map'), {
+              center: initialLocation,
+              zoom: 12
+          });
+
+
+          marker = new google.maps.Marker({
+              position: initialLocation,
+              map: map,
+              title: "Current Location"
+          });
+
+
+          streetView = new google.maps.StreetViewPanorama(
+              document.getElementById('street-view'),
+              {
+                  position: initialLocation,
+                  pov: { heading: 165, pitch: 0 },
+                  zoom: 1
+              }
+          );
+      }
+
+
+      // Update the map and marker based on the user's location
+      function updateLocation(latitude, longitude) {
+          const newLocation = { lat: latitude, lng: longitude };
+          marker.setPosition(newLocation);
+          map.setCenter(newLocation);
+      }
+
+
+      // Geolocation setup
+      if ("geolocation" in navigator) {
+          navigator.geolocation.watchPosition(successCallback, errorCallback, {
+              enableHighAccuracy: true,
+              timeout: 5000,
+              maximumAge: 0
+          });
+      } else {
+          document.getElementById("location-status").textContent = "Geolocation is not supported by this browser.";
+      }
+
+
+      function successCallback(position) {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+          const accuracy = position.coords.accuracy;
+
+
+          document.getElementById("location-status").textContent =
+              `Latitude: ${latitude}, Longitude: ${longitude}, Accuracy: ${accuracy} meters`;
+
+
+          updateLocation(latitude, longitude);
+      }
+
+
+      function errorCallback(error) {
+          let errorMessage;
+          switch (error.code) {
+              case 1: errorMessage = "Permission denied. Please allow location access."; break;
+              case 2: errorMessage = "Position unavailable. Please try again later."; break;
+              case 3: errorMessage = "Timeout. Please try moving to a location with better reception."; break;
+              default: errorMessage = "An unknown error occurred.";
+          }
+          document.getElementById("location-status").textContent = `Error: ${errorMessage}`;
+      }
+
+
+      // Firebase setup
+      const firebaseConfig = {
+          apiKey: "AIzaSyDMG47XHx5HWX_CKWgolVTmgDUF_flbg6U",
+          authDomain: "guesswashu-a6eb8.firebaseapp.com",
+          projectId: "guesswashu-a6eb8",
+          storageBucket: "guesswashu-a6eb8.appspot.com",
+          messagingSenderId: "194862977893",
+          appId: "1:194862977893:web:a8ecc3326ee349f907478c",
+      };
+
+
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+
+
+      async function getRandomLocation() {
+          const locationsRef = db.collection('locations');
+          const snapshot = await locationsRef.get();
+          const docs = snapshot.docs;
+
+
+          if (docs.length > 0) {
+              const randomDoc = docs[Math.floor(Math.random() * docs.length)];
+              return randomDoc.data().location;
+          } else {
+              console.error("No locations found in Firestore.");
+              return null;
+          }
+      }
+
+
+      function parseLocationString(locationString) {
+          const [lat, lng, ...params] = locationString.split(',');
+          return {
+              lat: parseFloat(lat),
+              lng: parseFloat(lng),
+              heading: parseFloat(params[2].split('h')[0]),
+              pitch: parseFloat(params[3].split('t')[0])
+          };
+      }
+
+
+      function updateStreetView(locationData) {
+          streetView.setPosition({ lat: locationData.lat, lng: locationData.lng });
+          streetView.setPov({
+              heading: locationData.heading,
+              pitch: locationData.pitch
+          });
+      }
+
+
+      document.getElementById('get-random-location').addEventListener('click', async () => {
+          const locationString = await getRandomLocation();
+          if (locationString) {
+              const locationData = parseLocationString(locationString);
+              updateStreetView(locationData);
+          } else {
+              alert("Failed to get a random location. Please try again.");
+          }
+      });
+  </script>
+</body>
+</html>
+
